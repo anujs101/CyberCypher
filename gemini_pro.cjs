@@ -4,11 +4,10 @@ const {
   HarmBlockThreshold,
 } = require("@google/generative-ai");
 
-//import dotenv for process.env
+// dotenv include
 require("dotenv").config();
-
 const apiKey = process.env.API_KEY;
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
   model: "gemini-2.0-flash",
@@ -23,37 +22,17 @@ const generationConfig = {
 };
 
 async function run() {
-  const chatSession = model.startChat({
-    generationConfig,
-    history: [
-      {
-        role: "user",
-        parts: [
-          {text: "I will give you some information about my start up and based on in search on google for stats regarding it and give the output in json format for Market Demand, Competition, Profitability,Scalability, Investment Risk accordingly from your data in the form of scores of 0 to 100.dont give it for this prompt"},
-        ],
-      },
-      {
-        role: "model",
-        parts: [
-          {text: "Okay, I understand. I will wait for you to provide the information about your startup. Once you provide the details, I will perform Google searches to find relevant statistics about:\n\n*   **Market Demand:** The potential customer base and need for your product/service.\n*   **Competition:** The intensity of rivalry within your industry.\n*   **Profitability:** The potential for your startup to generate profits.\n*   **Scalability:** The ability of your startup to grow and handle increased demand.\n*   **Investment Risk:** The likelihood of losing money on an investment in your startup.\n\nI will then analyze the search results and provide scores from 0 to 100 for each of these factors, presented in JSON format.\n"},
-        ],
-      },
-      {
-        role: "user",
-        parts: [
-          {text: "dont give anything else just give the json\n"},
-        ],
-      },
-      {
-        role: "model",
-        parts: [
-          {text: "Okay, I will only provide the JSON output after you give me the details about your startup and I perform the necessary research. I will not provide any other commentary or explanation.\n"},
-        ],
-      },
-    ],
-  });
+  const parts = [
+    {text: "input: {\n  \"sector\": \"technology\",\n  \"age\": 25,\n  \"teamSize\": 10,\n  \"amtInvest\": 5000000,\n  \"qualifications\": \"MTech AI\",\n  \"goal\": \"Launch an AI-powered SaaS platform with 100K users\",\n  \"advantages\": \"Experience in ML research, strong connections in AI community\",\n  \"jobExp\": \"5 years as ML Engineer at OpenAI\",\n\n}"},
+    {text: "output: 1. Validating Your Business IdeaBefore diving deep into development, it's crucial to validate your AI-powered SaaS platform. Here’s how you can approach it:Problem-Solution Fit: Ensure your AI solution is addressing a real and pressing problem. Conduct customer interviews, run pilot programs, and gather early feedback.Market Research: AI-powered SaaS is competitive—identify your Unique Value Proposition (UVP) by studying competitors and analyzing gaps in their offerings.Prototype & MVP Development: Given your technical expertise, focus on building a lean MVP to test core functionalities with early adopters.User Testing & Iteration: Engage beta testers from your AI community and refine the product based on their feedback.2. Strategic Advice on Company Building & GrowthTeam Building: Since you have a 10-member team, ensure clear role definitions. Focus on a strong mix of tech (AI engineers, data scientists) and non-tech (growth, marketing, sales).Sales & GTM Strategy: Start with a niche target audience. Use inbound marketing (content, webinars, case studies) and outbound sales (cold outreach, partnerships) to acquire initial users.Partnerships & Networking: Leverage your AI community connections for early adopters, advisors, and potential customers.3. Challenges for Solo Founders & How to Overcome ThemWhile you have a team, as a founder, you may face these solo challenges:Decision Fatigue: Build an advisory network to consult for high-stakes decisions.Product vs. Business Balance: Avoid over-engineering; focus on business traction (user acquisition, retention, revenue) alongside development.Loneliness & Burnout: Set realistic goals, delegate effectively, and seek mentorship.4. Fundraising Preparation & Investor ConnectionsWith $5M already raised, the next steps involve efficient capital allocation and future fundraising readiness.Use of Funds: Prioritize spending on customer acquisition, hiring key talent (growth & sales), and infrastructure scalability.Investor Pitch: Prepare a compelling growth narrative (traction, revenue model, scalability) for future rounds.Networking: Engage with VCs, angel investors, and AI-focused funds early on, even if you don’t need funding immediately.5. Additional Insights & Growth StrategiesUser Growth: Use freemium models, referral incentives, and community-driven engagement to scale towards 100K users.Competitive Moat: Develop proprietary AI models or data network effects to differentiate your product.Exit Strategy: Whether IPO or acquisition, maintain a long-term vision aligned with industry trends.Final Takeaway:Your AI expertise and network are major strengths, but balancing business growth, product-market fit, and strategic execution will be key to success. Stay agile, iterate fast, and leverage your community to scale effectively. 🚀"},
+    {text: "input: {\n  \"sector\": \"medical\",\n  \"age\": 20,\n  \"teamSize\": 100,\n  \"amtInvest\": 500000,\n  \"qualifications\": \"MBBS AIIMS\",\n  \"goal\": \"Make a good website for hospital services\",\n  \"advantages\": \"NA\",\n  \"jobExp\": \"5 years as  surgeon in AIIMS\",\n\n}"},
+    {text: "output: "},
+  ];
 
-  const result = await chatSession.sendMessage("My startup is a software company that develops productivity tools for small businesses.");
+  const result = await model.generateContent({
+    contents: [{ role: "user", parts }],
+    generationConfig,
+  });
   console.log(result.response.text());
 }
 
