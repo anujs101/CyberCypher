@@ -301,20 +301,16 @@
         const chatMessages = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
         const sendButton = document.getElementById('sendButton');
-
-        console.log(age)
-        console.log(jobExp)
-        console.log(qualifications)
-
+    
         // Show the preference asker on page load (after content loads)
         window.addEventListener('DOMContentLoaded', () => {
             preferenceAsker.style.display = 'flex'; // Show preference form
             chatContainer.style.display = 'none';  // Hide chat
         });
-
-        submitPreferences.addEventListener('click', () => {
+    
+        submitPreferences.addEventListener('click', async () => {
             // Capture user input values
-            console.log({
+            const dataPayload = {
                 sector: sector.value,
                 age: age.value,
                 teamSize: teamSize.value,
@@ -323,15 +319,40 @@
                 goal: goal.value,
                 advantages: advantages.value,
                 jobExp: jobExp.value
-            });
-
+            };
+    
+            console.log(dataPayload); // Log the captured data
+    
+            // Send data to the server
+            try {
+                const response = await fetch('/addData', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: 'exampleUserId',  // Replace this with the actual user ID
+                        dataPayload: dataPayload,
+                    }),
+                });
+    
+                const responseData = await response.json();
+                if (response.ok) {
+                    console.log('Data saved:', responseData);
+                } else {
+                    console.log('Error:', responseData.msg);
+                }
+            } catch (error) {
+                console.error('Error sending data to server:', error);
+            }
+    
             // Hide preference form and show chat
             preferenceAsker.style.display = 'none';
             chatContainer.style.display = 'flex';
-
+    
             // Focus on the chat input
             chatInput.focus();
-
+    
             // Clear inputs after submission
             sector.value = '';
             age.value = '';
@@ -342,7 +363,7 @@
             advantages.value = '';
             jobExp.value = '';
         });
-
+    
         // Function to add a message to the chat
         function addMessage(text, isUser = false) {
             const messageDiv = document.createElement('div');
@@ -352,7 +373,7 @@
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the latest message
         }
-
+    
         sendButton.addEventListener('click', () => {
             const message = chatInput.value.trim();
             if (message) {
@@ -361,5 +382,6 @@
             }
         });
     </script>
+    
 </body>
 </html>
