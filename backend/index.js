@@ -4,6 +4,7 @@ const userRoutes = require("./routes/userRoutes");
 const dataRoutes = require("./routes/dataRoutes");
 const geminiRoutes = require("./routes/geminiRoutes"); 
 const app = express();
+app.use(require('cors')());
 app.use(express.json());
 
 // Use modular routes
