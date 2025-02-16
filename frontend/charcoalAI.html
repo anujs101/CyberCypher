@@ -22,7 +22,7 @@
         }
 
         .header {
-            text-align: center;
+            text-align: center; 
             padding: 40px 0;
             width: 100%;
         }
@@ -62,6 +62,7 @@
             width: 90%;
             max-width: 600px;
             margin: 0 auto;
+            display: none; /* Initially hidden */
         }
 
         .chat-messages {
@@ -133,7 +134,7 @@
             height: 15px;
             fill: white;
         }
-        
+
         .get-started-button {
             display: flex;
             align-items: center;
@@ -151,12 +152,12 @@
             height: 100px;
             width: 100px;
         }
-        
+
         .get-started-text {
             color: #666;
             font-size: 14px;
         }
-        
+
         .get-started-arrow {
             background-color: #000;
             width: 24px;
@@ -166,14 +167,99 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .get-started-arrow svg {
             width: 12px;
             height: 12px;
         }
+
+        #preferenceAsker {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Black overlay with transparency */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000; /* Ensure it's on top */
+            border-radius: 15px; /* Rounded borders */
+        }
+
+
+        #preferenceAskerContent {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px; /* Rounded corners for content */
+            text-align: center;
+        }
+
+        #preferenceAskerContent label { /* Style for labels */
+            display: block; /* Make labels stack */
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        #preferenceAskerContent input[type="text"] { /* Style for text input */
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Prevent padding from affecting width */
+        }
+
+        #preferenceAskerContent input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #preferenceAskerContent button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <div id="preferenceAsker">
+        <div id="preferenceAskerContent">
+            <h2>Welcome! Tell us about your interests</h2>
+            <label for="sector">Sector:</label>
+            <input type="text" id="sector" name="sector" placeholder="e.g., Technology, Finance">
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="e.g., 25">
+
+            <label for="teamSize">Team Size:</label>
+            <input type="text" id="teamSize" name="teamSize" placeholder="(any number)">
+
+            <label for="amtInvest">Amount to Invest:</label>
+            <input type="number" id="amtInvest" name="amtInvest" placeholder="1,50,000, etc.">
+
+            <label for="qualifications">Qualifications:</label>
+            <input type="text" id="qualifications" name="qualifications" placeholder="e.g., BTech CSE, MBA, etc.">
+
+            <label for="goal">Goal:</label>
+            <input type="text" id="goal" name="goal" placeholder="e.g., Make a National Clothing Brand with  Store in Every State.">
+
+            <label for="advantages">Advantages:</label>
+            <input type="text" id="advantages" name="advantages" placeholder="e.g., Manufacturing Factory"> <br><br>
+
+            <label for="jobExp">Job Experience:</label>
+            <input type="text" id="jobExp" name="jobExp" placeholder="e.g., 3year Web Developer, etc."> <br><br>
+
+            <button id="submitPreferences">Submit</button>
+        </div>
+    </div>
+
     <div class="header">
         <div class="logo-container">
             <img src="./images/charcoalIllustration.png" alt="CharcoalBoss">
@@ -185,7 +271,7 @@
             <span>implement</span>
         </div>
     </div>
-    
+
     <div class="chat-container" id="chatContainer">
         <div class="chat-messages" id="chatMessages">
             <!-- Messages will be added here by JavaScript -->
@@ -199,38 +285,64 @@
             </button>
         </div>
     </div>
-    
-    <div class="get-started-button" id="getStartedButton" style="display: none;">
-        <span class="get-started-text">get started with your dream business</span>
-        <div class="get-started-arrow">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 17l5-5-5-5 1.5-1.5 6.5 6.5-6.5 6.5z" fill="white"/>
-            </svg>
-        </div>
-    </div>
 
     <script>
-        // On page load, retrieve user credentials (example)
-        const userEmail = "Devesh" //localStorage.getItem('userEmail');
-        // const userPassword = localStorage.getItem('userPassword'); // Don't do this in real app
-
-        if (userEmail) { // If user is logged in
-            // Use the userEmail to personalize the page, etc.
-            console.log("Welcome, " + userEmail);
-            // ... any other actions you want to take
-        } else {
-            // User is not logged in, maybe redirect to sign-in page
-            // window.location.href = 'signin.html';
-        }
+        const preferenceAsker = document.getElementById('preferenceAsker');
+        const submitPreferences = document.getElementById('submitPreferences');
+        const sector = document.getElementById('sector');
+        const age = document.getElementById('age');
+        const teamSize = document.getElementById('teamSize');
+        const amtInvest = document.getElementById('amtInvest');
+        const qualifications = document.getElementById('qualifications');
+        const goal = document.getElementById('goal');
+        const advantages = document.getElementById('advantages');
+        const jobExp = document.getElementById('jobExp');
+        const chatContainer = document.getElementById('chatContainer');
         const chatMessages = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
         const sendButton = document.getElementById('sendButton');
-        
-        // Focus the input when the page loads
-        window.onload = function() {
+
+        console.log(age)
+        console.log(jobExp)
+        console.log(qualifications)
+
+        // Show the preference asker on page load (after content loads)
+        window.addEventListener('DOMContentLoaded', () => {
+            preferenceAsker.style.display = 'flex'; // Show preference form
+            chatContainer.style.display = 'none';  // Hide chat
+        });
+
+        submitPreferences.addEventListener('click', () => {
+            // Capture user input values
+            console.log({
+                sector: sector.value,
+                age: age.value,
+                teamSize: teamSize.value,
+                amtInvest: amtInvest.value,
+                qualifications: qualifications.value,
+                goal: goal.value,
+                advantages: advantages.value,
+                jobExp: jobExp.value
+            });
+
+            // Hide preference form and show chat
+            preferenceAsker.style.display = 'none';
+            chatContainer.style.display = 'flex';
+
+            // Focus on the chat input
             chatInput.focus();
-        };
-        
+
+            // Clear inputs after submission
+            sector.value = '';
+            age.value = '';
+            teamSize.value = '';
+            amtInvest.value = '';
+            qualifications.value = '';
+            goal.value = '';
+            advantages.value = '';
+            jobExp.value = '';
+        });
+
         // Function to add a message to the chat
         function addMessage(text, isUser = false) {
             const messageDiv = document.createElement('div');
@@ -238,24 +350,14 @@
             messageDiv.classList.add(isUser ? 'user-message' : 'ai-message');
             messageDiv.textContent = text;
             chatMessages.appendChild(messageDiv);
-            
-            // Scroll to the bottom of the chat
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the latest message
         }
-        
-        // Function to send a message
-        function sendMessage() {
-            const messageText = chatInput.value.trim();
-            if (messageText) {
-                addMessage(messageText, true);
-                chatInput.value = '';
-            }
-        }
-        sendButton.addEventListener('click', sendMessage);
-        
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
+
+        sendButton.addEventListener('click', () => {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                chatInput.value = ''; // Clear input after sending message
             }
         });
     </script>

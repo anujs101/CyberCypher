@@ -3,7 +3,7 @@ const data = {
     datasets: [{
         label: "Business Idea Score",
         data: [85, 65, 75, 90, 50], // Scores for each category
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        backgroundColor: "rgba(31, 151, 231, 0.2)",
         borderColor: "rgba(54, 162, 235, 1)",
         borderWidth: 2
     }]
