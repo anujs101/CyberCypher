@@ -53,7 +53,7 @@
 
             // Here you would typically send the data to your server for authentication
             // and database interaction.  I'm simulating that with a fetch request.
-            fetch('/signin', {  // Replace '/signin' with your server endpoint
+            fetch('http://localhost:3000/user/login', {  // Replace '/signin' with your server endpoint
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -62,13 +62,12 @@
             })
             .then(response => response.json()) // Assuming server sends back JSON
             .then(data => {
-                if (data.success) { // Check if sign-in was successful
-                    // Store user credentials (e.g., in localStorage or cookies)
-                    localStorage.setItem('userEmail', email); // Example
-                    localStorage.setItem('userPassword', password); // Example - In real app, avoid storing passwords directly. Store JWTs instead.
-
-                    // Redirect to the landing page
-                    window.location.href = 'landingPage.html'; // Replace 'ai.html' with your landing page URL
+                if (data.token) {
+            // Store the token securely in localStorage
+            localStorage.setItem('authToken', data.token);
+            
+            // Redirect to the landing page
+            window.location.href = 'charcoalAI.html';
                 } else {
                     alert(data.message || "Sign-in failed. Please check your credentials."); // Display error message from server
                 }
