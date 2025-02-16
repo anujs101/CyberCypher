@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charcoal.AI</title>
+    <title>charcoal.ai</title>
+    <link rel="icon" href="./images/charcoalIllustration.png" type="image/x-icon"> <!-- Favicon link -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
@@ -55,42 +56,55 @@
     
     <!-- About Section -->
     <section id="about" class="text-center py-16">
-        <h2 class="text-8xl font-bold">What are we?</h2>
-        <img src="./images/arrowPoint.png" alt="arrow" class="w-24"> <!-- Adjust the width here -->
+        <h2 class="text-8xl font-bold">what are we?</h2>
         <p class="text-2xl mt-4">Your personal entrepreneurial journey helper-<br>an AI designed for the ones who dream <strong>big</strong></p>
     </section>
     
     <!-- Pricing Section -->
     <section id="pricing" class="text-center py-16">
-        <h2 class="text-4xl font-bold">Pricing</h2>
+        <h2 class="text-8xl font-bold">pricing</h2>
+
         <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-8 mt-6">
-            <!-- Base Plan -->
-            <div class="bg-black text-white p-6 rounded-lg w-64 mx-auto sm:mx-0">
-                <h3 class="font-semibold">Base Plan</h3>
-                <p class="text-2xl font-bold mt-2">₹0</p>
-                <p class="text-sm">Per Month</p>
-                <p class="text-xs mt-4">For Single User, Single Sector</p>
-                <p class="text-xs mt-2">Start with a single goal, and build on it in depth, till success!</p>
-                <button class="mt-4 bg-white text-black py-2 px-4 rounded">Choose Plan</button>
-            </div>
-            
-            <!-- Charcoal Plan -->
-            <div class="bg-black text-white p-6 rounded-lg w-64 mx-auto sm:mx-0 mt-6 sm:mt-0">
-                <h3 class="font-semibold">Charcoal Plan</h3>
-                <p class="text-2xl font-bold mt-2">₹400</p>
-                <p class="text-sm">Per Month</p>
-                <p class="text-xs mt-4">Master of All Trades</p>
-                <p class="text-xs mt-2">Multiple sectors, multiple business lines - all running at once!</p>
-                <button class="mt-4 bg-white text-black py-2 px-4 rounded">Choose Plan</button>
-            </div>
-        </div>
+    <div class="bg-black text-white p-8 rounded-lg w-80 mx-auto sm:mx-0">
+        <h3 class="font-semibold text-lg">Base Plan</h3>
+        <p class="text-3xl font-bold mt-3">₹0</p>
+        <p class="text-base mt-2">Per Month</p>
+        <p class="text-sm mt-4">For Single User, Single Sector</p>
+        <p class="text-sm mt-2">Start with a single goal, and build on it in depth, till success!</p>
+        <button class="mt-6 bg-white text-black py-3 px-6 rounded text-lg base-plan-button">Choose Plan</button>
+    </div>
+
+    <div class="bg-black text-white p-8 rounded-lg w-80 mx-auto sm:mx-0 mt-6 sm:mt-0">
+        <h3 class="font-semibold text-lg">Charcoal Plan</h3>
+        <p class="text-3xl font-bold mt-3">₹400</p>
+        <p class="text-base mt-2">Per Month</p>
+        <p class="text-sm mt-4">Master of All Trades</p>
+        <p class="text-sm mt-2">Multiple sectors, multiple business lines - all running at once!</p>
+        <button class="mt-6 bg-white text-black py-3 px-6 rounded text-lg charcoal-plan-button">Choose Plan</button>
+    </div>
+</div>
+        
+        
     </section>
     
     <!-- Footer -->
     <footer class="text-center text-sm py-6">
         <p>Made with ❤️ in India.</p>
-        <p>charcoal.ai ©2025</p>
+        <p>©2025 - charcoal.ai </p>
     </footer>
+    
+    <script>
+        const basePlanButton = document.querySelector('.base-plan-button');
+        const charcoalPlanButton = document.querySelector('.charcoal-plan-button');
+    
+        basePlanButton.addEventListener('click', () => {
+            window.location.href = 'signin.html'; // Replace 'signin.html' with your actual sign-in page URL
+        });
+    
+        charcoalPlanButton.addEventListener('click', () => {
+            window.location.href = 'signin.html'; // Replace 'signin.html' with your actual sign-in page URL
+        });
+    </script>
     
 </body>
 </html>
