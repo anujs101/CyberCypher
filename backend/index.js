@@ -2,14 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const dataRoutes = require("./routes/dataRoutes");
-
+const geminiRoutes = require("./routes/geminiRoutes"); 
 const app = express();
 app.use(express.json());
 
 // Use modular routes
 app.use("/user", userRoutes);
 app.use("/data", dataRoutes);
-
+app.use("/generate",geminiRoutes);
 // MongoDB connection
 mongoose.connect("mongodb+srv://anuj:mongo2024@cluster0.hyvqjrf.mongodb.net/charcoal", {
     useNewUrlParser: true,
