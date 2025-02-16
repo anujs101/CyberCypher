@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>charcoal.ai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            width: 100%;
+        }
+
+        .logo-container {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .brand-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .tagline {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .tagline span {
+            margin: 0 5px;
+        }
+
+        .tagline span:not(:last-child)::after {
+            content: "|";
+            margin-left: 10px;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            overflow-y: auto;
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            line-height: 1.4;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #e6e6e6;
+            margin-left: auto;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background-color: #f5f5f5;
+            margin-right: auto;
+        }
+
+        .input-container {
+            position: relative;
+            margin-top: auto;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: none;
+            border-radius: 20px;
+            background-color: #f0f0f0;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .send-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .send-button svg {
+            width: 15px;
+            height: 15px;
+            fill: white;
+        }
+        
+        .get-started-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f0f0f0;
+            border-radius: 25px;
+            padding: 15px 25px;
+            cursor: pointer;
+            margin: 20px auto 40px auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        img {
+            height: 100px;
+            width: 100px;
+        }
+        
+        .get-started-text {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .get-started-arrow {
+            background-color: #000;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .get-started-arrow svg {
+            width: 12px;
+            height: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="./images/charcoalIllustration.png" alt="CharcoalBoss">
+        </div>
+        <div class="brand-name">charcoal.ai</div>
+        <div class="tagline">
+            <span>tinker</span>
+            <span>search</span>
+            <span>implement</span>
+        </div>
+    </div>
+    
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be added here by JavaScript -->
+        </div>
+        <div class="input-container">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type your message...">
+            <button class="send-button" id="sendButton">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 21l21-9L2 3v7l15 2-15 2z" fill="white"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+    
+    <div class="get-started-button" id="getStartedButton" style="display: none;">
+        <span class="get-started-text">get started with your dream business</span>
+        <div class="get-started-arrow">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 17l5-5-5-5 1.5-1.5 6.5 6.5-6.5 6.5z" fill="white"/>
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        // On page load, retrieve user credentials (example)
+        const userEmail = "Devesh" //localStorage.getItem('userEmail');
+        // const userPassword = localStorage.getItem('userPassword'); // Don't do this in real app
+
+        if (userEmail) { // If user is logged in
+            // Use the userEmail to personalize the page, etc.
+            console.log("Welcome, " + userEmail);
+            // ... any other actions you want to take
+        } else {
+            // User is not logged in, maybe redirect to sign-in page
+            // window.location.href = 'signin.html';
+        }
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendButton = document.getElementById('sendButton');
+        
+        // Focus the input when the page loads
+        window.onload = function() {
+            chatInput.focus();
+        };
+        
+        // Function to add a message to the chat
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'ai-message');
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            
+            // Scroll to the bottom of the chat
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Function to send a message
+        function sendMessage() {
+            const messageText = chatInput.value.trim();
+            if (messageText) {
+                addMessage(messageText, true);
+                chatInput.value = '';
+            }
+        }
+        sendButton.addEventListener('click', sendMessage);
+        
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

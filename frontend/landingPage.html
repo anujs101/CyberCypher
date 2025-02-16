@@ -15,18 +15,29 @@
         .rotate-img:hover {
           transform: rotate(360deg); /* Rotate on hover */
         }
+
+        .illustration{
+            height: 30px;
+            width: 30px;
+        }
+
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
     
     <!-- Navbar -->
-    <nav class="bg-black text-white flex justify-between items-center py-4 px-8">
-        <div class="text-lg font-bold">charcoal.ai</div>
-        <div class="space-x-6">
-            <a href="#about" class="hover:underline">about</a>
-            <a href="#services" class="hover:underline">services</a>
+    <nav class="bg-black text-white flex justify-between items-center py-4 px-8 sticky top-0 bg-opacity-80">
+        <a href="#" class="text-lg font-bold">charcoal.ai</a>
+        <div class="flex space-x-8 font-bold">
+            <a href="#about" class="hover:underline">About</a>
+            <a href="#" class="illustration">
+                <img src="./images/charcoalIllustration.png" alt="something" class="w-12 sm:w-16 md:w-24">
+            </a>
+            <a href="#services" class="hover:underline">Services</a>
         </div>
+        <a href="./signin.html" class="bg-white text-black py-2 px-6 rounded-full font-semibold hover:bg-black hover:text-white transition-colors duration-300">Get Started</a>
     </nav>
+    
     
     <!-- Hero Section -->
     <section class="relative text-center py-16 overflow-hidden">
@@ -40,25 +51,22 @@
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
             <img src="./images/realCharcoal.png" alt="AI Rock" class="w-72 sm:w-96 md:w-[600px] rotate-img">
           </div>        
-        
     </section>
     
     <!-- About Section -->
     <section id="about" class="text-center py-16">
-        <h2 class="text-8xl font-bold">what are we?</h2>
+        <h2 class="text-8xl font-bold">What are we?</h2>
         <img src="./images/arrowPoint.png" alt="arrow" class="w-24"> <!-- Adjust the width here -->
-        <p class="text-2xl mt-4">your personal entrepreneurial journey helper-<br>an AI designed for the ones who dream <strong>big</strong></p>
+        <p class="text-2xl mt-4">Your personal entrepreneurial journey helper-<br>an AI designed for the ones who dream <strong>big</strong></p>
     </section>
-    
-    
     
     <!-- Pricing Section -->
     <section id="pricing" class="text-center py-16">
-        <h2 class="text-4xl font-bold">pricings</h2>
+        <h2 class="text-4xl font-bold">Pricing</h2>
         <div class="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-8 mt-6">
             <!-- Base Plan -->
             <div class="bg-black text-white p-6 rounded-lg w-64 mx-auto sm:mx-0">
-                <h3 class="font-semibold">base plan</h3>
+                <h3 class="font-semibold">Base Plan</h3>
                 <p class="text-2xl font-bold mt-2">₹0</p>
                 <p class="text-sm">Per Month</p>
                 <p class="text-xs mt-4">For Single User, Single Sector</p>
@@ -68,7 +76,7 @@
             
             <!-- Charcoal Plan -->
             <div class="bg-black text-white p-6 rounded-lg w-64 mx-auto sm:mx-0 mt-6 sm:mt-0">
-                <h3 class="font-semibold">charcoal plan</h3>
+                <h3 class="font-semibold">Charcoal Plan</h3>
                 <p class="text-2xl font-bold mt-2">₹400</p>
                 <p class="text-sm">Per Month</p>
                 <p class="text-xs mt-4">Master of All Trades</p>
@@ -80,7 +88,7 @@
     
     <!-- Footer -->
     <footer class="text-center text-sm py-6">
-        <p>made with ❤️ in India.</p>
+        <p>Made with ❤️ in India.</p>
         <p>charcoal.ai ©2025</p>
     </footer>
     
