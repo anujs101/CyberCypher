@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+  
+    
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateX(100px); }
@@ -23,15 +26,16 @@
         <div class="w-1/2">
             <h2 class="text-3xl font-bold mb-6">Sign Up</h2>
 
-            <input type="text" placeholder="Username" class="w-full p-3 border rounded-md mb-4">
-            <input type="email" placeholder="Email" class="w-full p-3 border rounded-md mb-4">
-            <input type="password" placeholder="Password" class="w-full p-3 border rounded-md mb-4">
-            <input type="password" placeholder="Confirm Password" class="w-full p-3 border rounded-md mb-4">
+            <input type="text" id="username" placeholder="Username" class="w-full p-3 border rounded-md mb-4">
+            <input type="email" id="email" placeholder="Email" class="w-full p-3 border rounded-md mb-4">
+            <input type="password" id="password" placeholder="Password" class="w-full p-3 border rounded-md mb-4">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" class="w-full p-3 border rounded-md mb-4">
 
-            <button class="bg-black text-white px-6 py-3 rounded-md transition duration-300 
-                           hover:bg-white hover:text-black border-2 border-black">
+            <button id="signUpButton" class="bg-black text-white px-6 py-3 rounded-md transition duration-300 
+            hover:bg-white hover:text-black border-2 border-black">
                 init →
             </button>
+
 
             <div class="mt-4 text-center">
                 <p>Already have an account? 
@@ -46,6 +50,45 @@
         </div>
 
     </div>
-
+    <script>
+        document.getElementById('signUpButton').addEventListener('click', async () => {
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+    
+            if (!username || !email || !password || !confirmPassword) {
+                alert("Please fill in all fields.");
+                return;
+            }
+    
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+    
+            try {
+                const response = await fetch('http://localhost:3000/user/signup', { // Update with your actual backend URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name: username, email, password }),
+                });
+    
+                const data = await response.json();
+    
+                if (response.ok) {
+                    alert("Signup successful! Redirecting to login...");
+                    window.location.href = 'signin.html';
+                } else {
+                    alert(data.msg || "Signup failed.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred during signup.");
+            }
+        });
+    </script>
 </body>
 </html>
