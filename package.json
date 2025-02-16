@@ -12,6 +12,9 @@
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
     "dotenv": "^16.4.7",
-    "experss": "^0.0.1-security"
+    "experss": "^0.0.1-security",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.10.1"
   }
 }

@@ -8,7 +8,6 @@ const data = {
         borderWidth: 2
     }]
 };
-
 // Chart Configuration
 const config = {
     type: "radar",
@@ -23,7 +22,6 @@ const config = {
         }
     }
 };
-
 // Initialize the Chart
 const ctx = document.getElementById("radarChart").getContext("2d");
 new Chart(ctx, config);
