@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center h-screen bg-gray-100">
+    
+    <div class="bg-white shadow-lg rounded-lg p-8 flex w-[60%] fade-in">
+        
+        <!-- Illustration -->
+        <div class="w-1/2 flex items-center justify-center">
+            <img src="./images/undraw_business-decisions_3x2a.svg" alt="Illustration" class="w-[80%]">
+        </div>
+
+        <!-- Sign-In Form -->
+        <div class="w-1/2">
+            <h2 class="text-3xl font-bold mb-6">Sign In</h2>
+
+            <input type="email" placeholder="Email" class="w-full p-3 border rounded-md mb-4">
+            <input type="password" placeholder="Password" class="w-full p-3 border rounded-md mb-4">
+
+            <div class="flex justify-between items-center">
+                <button class="bg-black text-white px-6 py-3 rounded-md transition duration-300 
+                               hover:bg-white hover:text-black border-2 border-black">
+                    launch →
+                </button>
+                <a href="#" class="text-blue-500 hover:underline">Forgot Password</a>
+            </div>
+
+            <div class="mt-4 text-center">
+                <p>Don't have an account? 
+                    <a href="signup.html" class="text-indigo-600 font-semibold hover:underline">Sign Up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
